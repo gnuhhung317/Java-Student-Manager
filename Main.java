@@ -9,7 +9,7 @@ public class Main {
         StudentManager manager = new StudentManager();
         String quantity;
         boolean isRunning = true;
-        // get the students's information here
+        // get the students information here
         System.out.println("Enter the student's quantity: ");
         quantity = sc.next();
         while (Validator.isNotInteger(quantity)) {
@@ -28,9 +28,10 @@ public class Main {
             System.out.println("2. Find student by ID");
             System.out.println("3. Update student by ID");
             System.out.println("4. Delete student by ID");
-            System.out.println("5. Show academical ability");
-            System.out.println("6. List by academical ability");
-            System.out.println("7. Exit");
+            System.out.println("5. Show academical ability percent");
+            System.out.println("6. Show medium score percent");
+            System.out.println("7. List by academical ability");
+            System.out.println("8. Exit");
             choice = sc.next();
 
             switch (choice) {
@@ -53,13 +54,18 @@ public class Main {
                     manager.deleteByID();
                     break;
                 case "5":
-
+                    manager.showAbilityPercent();
                     break;
                 case "6":
-
+                    manager.showMediumScorePercent();
                     break;
                 case "7":
+                    manager.showStudentByAbility();
+                    break;
+                case "8":
                     isRunning = false;
+                    System.out.println("Good bye!");
+                    break;
                 default:
                     System.out.println("Invalid choice!");
             }

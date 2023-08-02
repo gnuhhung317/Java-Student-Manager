@@ -3,6 +3,7 @@ package StudentManagement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.Scanner;
@@ -17,7 +18,7 @@ public class Validator {
     static int schoolStartDate;
     static double cpa;
     static Scanner sc = new Scanner(System.in);
-
+    static ArrayList<String> studentIDs = new ArrayList<>();
     public static boolean isNotInteger(String s) {
         int number;
         try {
@@ -49,23 +50,22 @@ public class Validator {
         return name;
     }
 
-
-    public static LocalDate getBirthdayInput(){
+    public static LocalDate getBirthdayInput() {
         String birthdayString;
         LocalDate birthday = null;
         boolean isValidDate = false;
-        do{
+        do {
             System.out.println("Enter your birthday (dd/mm/yyyy): ");
             birthdayString = sc.nextLine();
 
             try {
                 birthday = LocalDate.parse(birthdayString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 isValidDate = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.print("Invalid input! ");
                 isValidDate = false;
             }
-        }while (!isValidDate);
+        } while (!isValidDate);
         return birthday;
     }
 
@@ -94,7 +94,7 @@ public class Validator {
             if (height < Constant.MIN_HEIGHT || height > Constant.MAX_HEIGHT) {
                 System.out.print("Invalid input! ");
             }
-        } while (height < Constant.MIN_HEIGHT && height > Constant.MAX_HEIGHT);
+        } while (height < Constant.MIN_HEIGHT || height > Constant.MAX_HEIGHT);
         return height;
     }
 
@@ -119,10 +119,12 @@ public class Validator {
     public static String getStudentID() {
         System.out.println("Enter your student ID: ");
         studentID = sc.nextLine();
-        while (studentID.strip().length() != Constant.ID_LENGTH) {
+        while (studentID.strip().length() != Constant.ID_LENGTH || studentIDs.contains(studentID)) {
             System.out.println("Invalid input! Enter your student ID: ");
             studentID = sc.nextLine();
         }
+        //add studentid to a arraylist to prevent same studentid
+        studentIDs.add(studentID);
         return studentID;
     }
 
@@ -171,7 +173,5 @@ public class Validator {
 
         return cpa;
     }
-
-
 
 }
