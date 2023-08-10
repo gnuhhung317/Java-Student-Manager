@@ -1,7 +1,8 @@
 package StudentManagement;
 
+
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 public class Student extends Person {
@@ -10,7 +11,9 @@ public class Student extends Person {
     private int schoolStartDate;
     private double CPA;
     private AcademicAbility ability;
-
+    public Student(){
+        super();
+    }
     public Student(String name, LocalDate birthday, String address, double height, double weight, String studentID,
             String school, int schoolStartDate, double CPA) {
         super(name, birthday, address, height, weight);
@@ -80,7 +83,9 @@ public class Student extends Person {
                 "StudentID:" + getStudentID() + "\n" +
                 "School: " + getSchool() + "\n" +
                 "SchoolStartDate: " + getSchoolStartDate() + "\n" +
-                "CPA: " + getCPA();
+                "CPA: " + getCPA()+
+                "\n----------------------------------";
     }
+
 
 }

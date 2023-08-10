@@ -1,11 +1,9 @@
 package StudentManagement;
 
 
+import java.io.*;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class StudentManager {
     LinkedList<Student> students = new LinkedList<>();
@@ -25,8 +23,8 @@ public class StudentManager {
     double[] percentByAbility = new double[6];
     //HashMap save cpa percent
     HashMap<Double,Double> mediumScorePercent = new HashMap<>();
-    public void addStudent() {
 
+    public void getAllFields(){
         name = Validator.getNameInput();
         birthday = Validator.getBirthdayInput();
         address = Validator.getAddressInput();
@@ -35,10 +33,14 @@ public class StudentManager {
         studentID = Validator.getStudentID();
         school = Validator.getSchoolInput();
         year = Validator.getStartSchoolYear();
-        cpa = Validator.getcpaInput();
+        cpa = Validator.getCpaInput();
+    }
+    public void addStudent() {
+
+        this.getAllFields();
         Student student = new Student(name, birthday, address, height, weight, studentID, school, year, cpa);
         students.add(student);
-        System.out.println(student.toString());
+        System.out.println(student);
     }
 
     public Student findByID() {
@@ -64,7 +66,12 @@ public class StudentManager {
     }
 
     public void updateByID() {
+        //update student by fields
         Student student = findByID();
+        if (students.isEmpty()){
+            System.out.println("There's no student in list!");
+            return;
+        }
         if (student == null) {
             System.out.println("Student not found");
             return;
@@ -75,107 +82,98 @@ public class StudentManager {
             System.out.println("Update: ");
             System.out.println("1. Name");
             System.out.println("2. Birthday");
-            System.out.println("3. Address\n" +
-                    "4. Height\n" +
-                    "5. Weight\n" +
-                    "6. Student id\n" +
-                    "7. school\n" +
-                    "8. Year go to university\n" +
-                    "9. Medium score\n" +
-                    "10. All\n" +
-                    "11. Exit");
+            System.out.println("3. Address");
+            System.out.println("4. Height");
+            System.out.println("5. Weight");
+            System.out.println("6. Student ID");
+            System.out.println("7. School");
+            System.out.println("8. Year of University Entry");
+            System.out.println("9. Average Score");
+            System.out.println("10. All");
+            System.out.println("11. Exit");
+
             choice = sc.next();
             switch (choice) {
-                case "1":
+                case "1" -> {
                     name = Validator.getNameInput();
                     student.setName(name);
                     isChoosing = false;
-                    break;
-                case "2":
+                }
+                case "2" -> {
                     birthday = Validator.getBirthdayInput();
                     student.setBirthday(birthday);
                     isChoosing = false;
-                    break;
-                case "3":
+                }
+                case "3" -> {
                     address = Validator.getAddressInput();
                     student.setAddress(address);
                     isChoosing = false;
-                    break;
-                case "4":
+                }
+                case "4" -> {
                     height = Validator.getHeightInput();
                     student.setHeight(height);
                     isChoosing = false;
-                    break;
-                case "5":
+                }
+                case "5" -> {
                     weight = Validator.getWeightInput();
                     student.setWeight(weight);
                     isChoosing = false;
-
-                    break;
-                case "6":
+                }
+                case "6" -> {
                     studentID = Validator.getStudentID();
                     student.setStudentID(studentID);
                     isChoosing = false;
-
-                    break;
-                case "7":
+                }
+                case "7" -> {
                     school = Validator.getSchoolInput();
                     student.setSchool(school);
                     isChoosing = false;
-                    break;
-                case "8":
+                }
+                case "8" -> {
                     year = Validator.getStartSchoolYear();
                     student.setSchoolStartDate(year);
                     isChoosing = false;
-
-                    break;
-                case "9":
-                    cpa = Validator.getcpaInput();
+                }
+                case "9" -> {
+                    cpa = Validator.getCpaInput();
                     student.setCPA(cpa);
                     isChoosing = false;
+                }
+                case "10" -> {
 
-                    break;
-                case "10":
-                    name = Validator.getNameInput();
-                    birthday = Validator.getBirthdayInput();
-                    address = Validator.getAddressInput();
-                    height = Validator.getHeightInput();
-                    weight = Validator.getWeightInput();
-                    studentID = Validator.getStudentID();
-                    school = Validator.getSchoolInput();
-                    year = Validator.getStartSchoolYear();
-                    cpa = Validator.getcpaInput();
+                    this.getAllFields();
                     student.setName(name);
                     student.setCPA(cpa);
                     student.setWeight(weight);
                     student.setHeight(height);
                     student.setBirthday(birthday);
                     student.setAddress(address);
-                    student.setCPA(cpa);
-                    ;
                     student.setSchoolStartDate(year);
                     student.setStudentID(studentID);
                     isChoosing = false;
-                    break;
-                case "11":
+                }
+                case "11" -> {
                     return;
-                default:
-
-                    System.out.println("Invalid choice :" + choice);
-
-                    break;
-
+                }
+                default -> System.out.println("Invalid choice :" + choice);
             }
 
         } while (isChoosing);
-        System.out.println(student.toString());
+        System.out.println(student);
     }
 
     public void deleteByID() {
+        //delete student by id
         Student student = findByID();
 
-        if (student == null)
-            System.out.println("Failed");
+        if (students.isEmpty()){
+            System.out.println("There's no student in list!");
+
+        }
+        else if (student == null) {
+            System.out.println("Student not found");
+
+        }
         else {
             students.remove(student);
             System.out.println("Successfully");
@@ -194,7 +192,7 @@ public class StudentManager {
     public void showAbilityPercent() {
         AcademicAbility ability;
         int index;
-        // clear if has the old list, prevent save the old student
+        // clear list, prevent save the old student
         for(int i = 0; i< 6 ; i++){
             countByAbility[i] = 0;
         }
@@ -212,13 +210,14 @@ public class StudentManager {
 
     }
     public  void showMediumScorePercent(){
-
+        //show student percent by medium score
         double mediumScore;
         mediumScorePercent.clear();
         for (Student student : students){
             int count = 0;
             mediumScore = student.getCPA();
             for (Student student1 : students){
+                //count each score exist
                 if (mediumScore == student1.getCPA()) count++;
             }
             mediumScorePercent.put(mediumScore,toPercent(count,students.size()));
@@ -229,44 +228,66 @@ public class StudentManager {
     }
 
     public void matchStudentAndAbility(AcademicAbility ability){
+        //find students by ability
+        boolean notFound = true;
         for (Student student : students){
             if (student.getAbility() == ability){
-                System.out.println(student.toString());
+                System.out.println(student);
                 System.out.println("--------------------------------");
+                notFound = false;
             }
         }
+        if (notFound) System.out.println("No student is "+ ability);
     }
     public void showStudentByAbility(){
+        //let user choose the ability to show students
         String choice;
         int index = 1;
         System.out.println("Choose: ");
-        for (AcademicAbility abilitiy : abilities){
-            System.out.println(index + ". "+ abilitiy);
+        for (AcademicAbility ability : abilities){
+            System.out.println(index + ". "+ ability);
             index +=1;
         }
 
         choice = sc.nextLine();
-        switch (choice){
-            case "1":
-                matchStudentAndAbility(abilities.get(0));
-                break;
-            case "2":
-                matchStudentAndAbility(abilities.get(1));
-                break;
-            case "3":
-                matchStudentAndAbility(abilities.get(2));
-                break;
-            case "4":
-                matchStudentAndAbility(abilities.get(3));
-                break;
-            case "5":
-                matchStudentAndAbility(abilities.get(4));
-                break;
-            case "6":
-                matchStudentAndAbility(abilities.get(5));
-                break;
-            default:
-                System.out.println("Invalid choice!");
+        switch (choice) {
+            case "1" -> matchStudentAndAbility(abilities.get(0));
+            case "2" -> matchStudentAndAbility(abilities.get(1));
+            case "3" -> matchStudentAndAbility(abilities.get(2));
+            case "4" -> matchStudentAndAbility(abilities.get(3));
+            case "5" -> matchStudentAndAbility(abilities.get(4));
+            case "6" -> matchStudentAndAbility(abilities.get(5));
+            default -> System.out.println("Invalid choice!");
         }
     }
+    public void saveStudentsInfo() {
+        File f = new File(Constant.INFO_FILE);
+        try{
+            PrintWriter pw = new PrintWriter(f);
+            for (Student student : students){
+                pw.println(student.toString());
+            }
+            pw.flush();
+            pw.close();
+        }catch (Exception e){
+            System.out.println("Save objects fail!");
+            e.printStackTrace();
+        }
+
+    }
+    public void saveStudentObjects(){
+        File f = new File(Constant.OBJECT_FILE);
+        try {
+            OutputStream os = new FileOutputStream(f);
+            ObjectOutputStream oos = new ObjectOutputStream(os);
+            oos.writeObject(students);
+            oos.flush();
+            oos.close();
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("Save objects fail!");
+        }
+    }
+
+
 }

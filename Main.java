@@ -9,10 +9,11 @@ public class Main {
         StudentManager manager = new StudentManager();
         String quantity;
         boolean isRunning = true;
+
         // get the students information here
         System.out.println("Enter the student's quantity: ");
         quantity = sc.next();
-        while (Validator.isNotInteger(quantity)) {
+        while (Validator.isNotInteger(quantity)|| Integer.parseInt(quantity)<0) {
             System.out.println("Invalid input, enter the quantity again: ");
             quantity = sc.next();
         }
@@ -35,39 +36,27 @@ public class Main {
             choice = sc.next();
 
             switch (choice) {
-
-                case "1":
-                    manager.addStudent();
-                    break;
-                case "2":
+                case "1" -> manager.addStudent();
+                case "2" -> {
                     Student student = manager.findByID();
                     if (student == null) {
                         System.out.println("Student not found");
                         break;
                     }
-                    System.out.println(student.toString());
-                    break;
-                case "3":
-                    manager.updateByID();
-                    break;
-                case "4":
-                    manager.deleteByID();
-                    break;
-                case "5":
-                    manager.showAbilityPercent();
-                    break;
-                case "6":
-                    manager.showMediumScorePercent();
-                    break;
-                case "7":
-                    manager.showStudentByAbility();
-                    break;
-                case "8":
+                    System.out.println(student);
+                }
+                case "3" -> manager.updateByID();
+                case "4" -> manager.deleteByID();
+                case "5" -> manager.showAbilityPercent();
+                case "6" -> manager.showMediumScorePercent();
+                case "7" -> manager.showStudentByAbility();
+                case "8" -> {
                     isRunning = false;
+                    manager.saveStudentsInfo();
+                    manager.saveStudentObjects();
                     System.out.println("Good bye!");
-                    break;
-                default:
-                    System.out.println("Invalid choice!");
+                }
+                default -> System.out.println("Invalid choice!");
             }
         } while (isRunning);
 

@@ -1,18 +1,16 @@
 package StudentManagement;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 import java.util.Scanner;
 
 public class Validator {
     static String name;
     static String address;
-    static double height;
-    static double weight;
+    static Double height;
+    static Double weight;
     static String studentID;
     static String school;
     static int schoolStartDate;
@@ -20,9 +18,9 @@ public class Validator {
     static Scanner sc = new Scanner(System.in);
     static ArrayList<String> studentIDs = new ArrayList<>();
     public static boolean isNotInteger(String s) {
-        int number;
+
         try {
-            number = Integer.parseInt(s);
+            int number = Integer.parseInt(s);
 
         } catch (Exception e) {
             return true;
@@ -31,9 +29,9 @@ public class Validator {
     }
 
     public static boolean isNotDouble(String s) {
-        double number;
+
         try {
-            number = Double.parseDouble(s);
+            double number = Double.parseDouble(s);
         } catch (Exception e) {
             return true;
         }
@@ -56,14 +54,14 @@ public class Validator {
         boolean isValidDate = false;
         do {
             System.out.println("Enter your birthday (dd/mm/yyyy): ");
-            birthdayString = sc.nextLine();
+            birthdayString = sc.nextLine().trim();
 
             try {
-                birthday = LocalDate.parse(birthdayString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                birthday = LocalDate.parse(birthdayString, DateTimeFormatter.ofPattern("d/M/yyyy"));
                 isValidDate = true;
             } catch (Exception e) {
                 System.out.print("Invalid input! ");
-                isValidDate = false;
+
             }
         } while (!isValidDate);
         return birthday;
@@ -81,8 +79,10 @@ public class Validator {
         return address;
     }
 
+
     public static double getHeightInput() {
         String heightString;
+        boolean isInvalid = true;
         do {
             System.out.println("Enter your height(cm): ");
             heightString = sc.nextLine();
@@ -91,15 +91,25 @@ public class Validator {
                 heightString = sc.nextLine();
             }
             height = Double.parseDouble(heightString);
-            if (height < Constant.MIN_HEIGHT || height > Constant.MAX_HEIGHT) {
+            String minHeight = Constant.MIN_HEIGHT.toString(), maxHeight = Constant.MAX_HEIGHT.toString();
+            if (heightString.split("\\.")[0].length() == minHeight.length()-2&&heightString.compareTo(minHeight) < 0 ||
+                heightString.split("\\.")[0].length() == maxHeight.length()-2&& heightString.compareTo(maxHeight) > 0||
+                height > Constant.MAX_HEIGHT || height < Constant.MIN_HEIGHT||
+                heightString.length()>10) {
+                // minHeight.length() -2 to remove the length of .0
+                // str.split("\\.")[0] to get the natural part
                 System.out.print("Invalid input! ");
+            }else{
+                isInvalid = false;
+
             }
-        } while (height < Constant.MIN_HEIGHT || height > Constant.MAX_HEIGHT);
+        } while (isInvalid);
         return height;
     }
 
     public static double getWeightInput() {
         String weightString;
+        boolean isInvalid = true;
         do {
             System.out.println("Enter your weight(kg): ");
             weightString = sc.nextLine();
@@ -108,13 +118,23 @@ public class Validator {
                 weightString = sc.nextLine();
             }
             weight = Double.parseDouble(weightString);
-            if (weight < Constant.MIN_WEIGHT || weight > Constant.MAX_WEIGHT) {
-                System.out.print("Invalid input! ");
-            }
 
-        } while (weight < Constant.MIN_WEIGHT || weight > Constant.MAX_WEIGHT);
+            String minWeight = Constant.MIN_WEIGHT.toString(), maxWeight = Constant.MAX_WEIGHT.toString();
+            if (weightString.split("\\.")[0].length() == minWeight.length()-2&&weightString.compareTo(minWeight) < 0 ||
+                    weightString.split("\\.")[0].length() == maxWeight.length()-2&& weightString.compareTo(maxWeight) > 0||
+                    weight > Constant.MAX_WEIGHT ||  weight < Constant.MIN_WEIGHT||
+                    weightString.length()>10) {
+                // minHeight.length() -2 to remove the length of .0
+                // str.split("\\.")[0] to get the natural part
+                System.out.print("Invalid input! ");
+            }else{
+                isInvalid = false;
+
+            }
+        } while (isInvalid);
         return weight;
     }
+
 
     public static String getStudentID() {
         System.out.println("Enter your student ID: ");
@@ -123,7 +143,7 @@ public class Validator {
             System.out.println("Invalid input! Enter your student ID: ");
             studentID = sc.nextLine();
         }
-        //add studentid to a arraylist to prevent same studentid
+        //add student id to a arraylist to prevent same student id
         studentIDs.add(studentID);
         return studentID;
     }
@@ -145,7 +165,7 @@ public class Validator {
             System.out.println("Enter the year your start university:  ");
             yearString = sc.nextLine();
             while (isNotInteger(yearString)) {
-                System.out.println("Invalid input! Enter the year you start univerity: ");
+                System.out.println("Invalid input! Enter the year you start university: ");
                 yearString = sc.nextLine();
             }
             schoolStartDate = Integer.parseInt(yearString);
@@ -156,7 +176,7 @@ public class Validator {
         return schoolStartDate;
     }
 
-    public static double getcpaInput() {
+    public static double getCpaInput() {
         String cpaString;
         do {
             System.out.println("Enter you medium score: ");

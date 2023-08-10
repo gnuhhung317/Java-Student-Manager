@@ -1,10 +1,10 @@
 package StudentManagement;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Objects;
 
-public class Person {
+
+public class Person implements Serializable, Comparable<Person> {
     private static int countPerson = 0;
     private int id;
     private String name;
@@ -14,6 +14,7 @@ public class Person {
     private double weight;
 
     public Person(String name, LocalDate birthday, String address, double height, double weight) {
+
         this.countPerson++;
         this.id = countPerson;
         this.name = name;
@@ -21,6 +22,10 @@ public class Person {
         this.address = address;
         this.height = height;
         this.weight = weight;
+    }
+
+    public Person() {
+
     }
 
     public int getId() {
@@ -83,4 +88,8 @@ public class Person {
                 "}";
     }
 
+    @Override
+    public int compareTo(Person o) {
+        return (this.id == o.id)?1:-1;
+    }
 }
