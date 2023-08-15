@@ -5,7 +5,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
-public class StudentManager {
+public class StudentManagerList {
     public LinkedList <Student> students = new LinkedList<>();
     Scanner sc = new Scanner(System.in);
     String name, address,studentCode,school;

@@ -9,7 +9,7 @@ public class Student extends Person {
     private String studentCode;
     private String school;
     private int schoolStartDate;
-    private double CPA;
+    private double cPA;
     private AcademicAbility ability;
     public Student(){
         super();
@@ -20,7 +20,7 @@ public class Student extends Person {
         this.studentCode = studentCode;
         this.school = school;
         this.schoolStartDate = schoolStartDate;
-        this.CPA = CPA;
+        this.cPA = CPA;
         this.ability = AcademicAbility.getAcademicAbility(CPA);
     }
 
@@ -49,12 +49,12 @@ public class Student extends Person {
     }
 
     public double getCPA() {
-        return this.CPA;
+        return this.cPA;
     }
 
     public void setCPA(double CPA) {
         ability = AcademicAbility.getAcademicAbility(CPA);
-        this.CPA = CPA;
+        this.cPA = CPA;
     }
 
     public AcademicAbility getAbility() {
@@ -68,7 +68,7 @@ public class Student extends Person {
         if (o == null || getClass() != o.getClass())
             return false;
         Student student = (Student) o;
-        return schoolStartDate == student.schoolStartDate && Double.compare(CPA, student.CPA) == 0
+        return schoolStartDate == student.schoolStartDate && Double.compare(cPA, student.cPA) == 0
                 && Objects.equals(studentCode, student.studentCode) && Objects.equals(school, student.school);
     }
 
@@ -83,7 +83,7 @@ public class Student extends Person {
                 "StudentID:" + getStudentCode() + "\n" +
                 "School: " + getSchool() + "\n" +
                 "SchoolStartDate: " + getSchoolStartDate() + "\n" +
-                "CPA: " + getCPA()+
+                "CPA: " + getCPA()+ "\n"+
                 "AcademicAbility: "+ getAbility()+
                 "\n----------------------------------";
     }
