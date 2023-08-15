@@ -6,9 +6,9 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class StudentManager {
-    LinkedList<Student> students = new LinkedList<>();
+    public LinkedList <Student> students = new LinkedList<>();
     Scanner sc = new Scanner(System.in);
-    String name, address, studentID, school;
+    String name, address,studentCode,school;
     double height, weight, cpa;
     int year;
     LocalDate birthday;
@@ -30,34 +30,45 @@ public class StudentManager {
         address = Validator.getAddressInput();
         height = Validator.getHeightInput();
         weight = Validator.getWeightInput();
-        studentID = Validator.getStudentID();
+        studentCode = Validator.getStudentCode();
         school = Validator.getSchoolInput();
         year = Validator.getStartSchoolYear();
         cpa = Validator.getCpaInput();
     }
     public void addStudent() {
+        System.out.println("Enter the student's quantity: ");
+        String quantity = sc.next();
+        while (Validator.isNotInteger(quantity)|| Integer.parseInt(quantity)<0) {
+            System.out.println("Invalid input, enter the quantity again: ");
+            quantity = sc.next();
+        }
+        for (int i = 0 ; i < Integer.parseInt(quantity); i++){
+            this.getAllFields();
+            Student student = new Student(name, birthday, address, height, weight, studentCode, school, year, cpa);
+            students.add(student);
+            System.out.println("Student's information:");
+            System.out.println(student);
+        }
+        System.out.println("Add student complete!");
 
-        this.getAllFields();
-        Student student = new Student(name, birthday, address, height, weight, studentID, school, year, cpa);
-        students.add(student);
-        System.out.println(student);
+
     }
 
     public Student findByID() {
         if (students.isEmpty()) {
             return null;
         }
-        String idString;
+        String iDString;
         System.out.println("Enter student's id: ");
-        idString = sc.next();
-        while (Validator.isNotInteger(idString)) {
+        iDString = sc.next();
+        while (Validator.isNotInteger(iDString)) {
             System.out.println("Invalid id, enter again: ");
-            idString = sc.next();
+            iDString = sc.next();
         }
-        int id = Integer.parseInt(idString);
+        int iD = Integer.parseInt(iDString);
 
         for (Student student : students) {
-            if (id == student.getId()) {
+            if (iD == student.getID()) {
                 return student;
             }
         }
@@ -77,7 +88,7 @@ public class StudentManager {
             return;
         }
         String choice;
-        boolean isChoosing = true;
+        boolean isChoosing ;
         do {
             System.out.println("Update: ");
             System.out.println("1. Name");
@@ -92,52 +103,44 @@ public class StudentManager {
             System.out.println("10. All");
             System.out.println("11. Exit");
 
+            isChoosing = false;
             choice = sc.next();
             switch (choice) {
                 case "1" -> {
                     name = Validator.getNameInput();
                     student.setName(name);
-                    isChoosing = false;
                 }
                 case "2" -> {
                     birthday = Validator.getBirthdayInput();
                     student.setBirthday(birthday);
-                    isChoosing = false;
                 }
                 case "3" -> {
                     address = Validator.getAddressInput();
                     student.setAddress(address);
-                    isChoosing = false;
                 }
                 case "4" -> {
                     height = Validator.getHeightInput();
                     student.setHeight(height);
-                    isChoosing = false;
                 }
                 case "5" -> {
                     weight = Validator.getWeightInput();
                     student.setWeight(weight);
-                    isChoosing = false;
                 }
                 case "6" -> {
-                    studentID = Validator.getStudentID();
-                    student.setStudentID(studentID);
-                    isChoosing = false;
+                    studentCode = Validator.getStudentCode();
+                    student.setStudentCode(studentCode);
                 }
                 case "7" -> {
                     school = Validator.getSchoolInput();
                     student.setSchool(school);
-                    isChoosing = false;
                 }
                 case "8" -> {
                     year = Validator.getStartSchoolYear();
                     student.setSchoolStartDate(year);
-                    isChoosing = false;
                 }
                 case "9" -> {
                     cpa = Validator.getCpaInput();
                     student.setCPA(cpa);
-                    isChoosing = false;
                 }
                 case "10" -> {
 
@@ -149,13 +152,15 @@ public class StudentManager {
                     student.setBirthday(birthday);
                     student.setAddress(address);
                     student.setSchoolStartDate(year);
-                    student.setStudentID(studentID);
-                    isChoosing = false;
+                    student.setStudentCode(studentCode);
                 }
                 case "11" -> {
                     return;
                 }
-                default -> System.out.println("Invalid choice :" + choice);
+                default -> {
+                    System.out.println("Invalid choice :" + choice);
+                    isChoosing = true;
+                }
             }
 
         } while (isChoosing);
@@ -233,7 +238,6 @@ public class StudentManager {
         for (Student student : students){
             if (student.getAbility() == ability){
                 System.out.println(student);
-                System.out.println("--------------------------------");
                 notFound = false;
             }
         }

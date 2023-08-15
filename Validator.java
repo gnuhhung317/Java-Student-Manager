@@ -11,12 +11,13 @@ public class Validator {
     static String address;
     static Double height;
     static Double weight;
-    static String studentID;
+    static String studentCode;
     static String school;
     static int schoolStartDate;
     static double cpa;
     static Scanner sc = new Scanner(System.in);
     static ArrayList<String> studentIDs = new ArrayList<>();
+
     public static boolean isNotInteger(String s) {
 
         try {
@@ -68,7 +69,7 @@ public class Validator {
     }
 
     public static String getAddressInput() {
-        System.out.println("Enter your address");
+        System.out.println("Enter your address:");
 
         address = sc.nextLine();
         while (address.isEmpty() || address.length() > Constant.MAX_ADDRESS_LENGTH) {
@@ -78,7 +79,6 @@ public class Validator {
 
         return address;
     }
-
 
     public static double getHeightInput() {
         String heightString;
@@ -92,14 +92,17 @@ public class Validator {
             }
             height = Double.parseDouble(heightString);
             String minHeight = Constant.MIN_HEIGHT.toString(), maxHeight = Constant.MAX_HEIGHT.toString();
-            if (heightString.split("\\.")[0].length() == minHeight.length()-2&&heightString.compareTo(minHeight) < 0 ||
-                heightString.split("\\.")[0].length() == maxHeight.length()-2&& heightString.compareTo(maxHeight) > 0||
-                height > Constant.MAX_HEIGHT || height < Constant.MIN_HEIGHT||
-                heightString.length()>10) {
+            if (heightString.split("\\.")[0].length() == minHeight.length() - 2 && heightString.compareTo(minHeight) < 0
+                    ||
+                    heightString.split("\\.")[0].length() == maxHeight.length() - 2
+                            && heightString.compareTo(maxHeight) > 0
+                    ||
+                    height > Constant.MAX_HEIGHT || height < Constant.MIN_HEIGHT ||
+                    heightString.length() > 10) {
                 // minHeight.length() -2 to remove the length of .0
                 // str.split("\\.")[0] to get the natural part
                 System.out.print("Invalid input! ");
-            }else{
+            } else {
                 isInvalid = false;
 
             }
@@ -120,14 +123,17 @@ public class Validator {
             weight = Double.parseDouble(weightString);
 
             String minWeight = Constant.MIN_WEIGHT.toString(), maxWeight = Constant.MAX_WEIGHT.toString();
-            if (weightString.split("\\.")[0].length() == minWeight.length()-2&&weightString.compareTo(minWeight) < 0 ||
-                    weightString.split("\\.")[0].length() == maxWeight.length()-2&& weightString.compareTo(maxWeight) > 0||
-                    weight > Constant.MAX_WEIGHT ||  weight < Constant.MIN_WEIGHT||
-                    weightString.length()>10) {
+            if (weightString.split("\\.")[0].length() == minWeight.length() - 2 && weightString.compareTo(minWeight) < 0
+                    ||
+                    weightString.split("\\.")[0].length() == maxWeight.length() - 2
+                            && weightString.compareTo(maxWeight) > 0
+                    ||
+                    weight > Constant.MAX_WEIGHT || weight < Constant.MIN_WEIGHT ||
+                    weightString.length() > 10) {
                 // minHeight.length() -2 to remove the length of .0
                 // str.split("\\.")[0] to get the natural part
                 System.out.print("Invalid input! ");
-            }else{
+            } else {
                 isInvalid = false;
 
             }
@@ -135,17 +141,16 @@ public class Validator {
         return weight;
     }
 
-
-    public static String getStudentID() {
-        System.out.println("Enter your student ID: ");
-        studentID = sc.nextLine();
-        while (studentID.strip().length() != Constant.ID_LENGTH || studentIDs.contains(studentID)) {
+    public static String getStudentCode() {
+        System.out.println("Enter your student Code: ");
+        studentCode = sc.nextLine();
+        while (studentCode.strip().length() != Constant.ID_LENGTH || studentIDs.contains(studentCode)) {
             System.out.println("Invalid input! Enter your student ID: ");
-            studentID = sc.nextLine();
+            studentCode = sc.nextLine();
         }
-        //add student id to a arraylist to prevent same student id
-        studentIDs.add(studentID);
-        return studentID;
+        // add student id to a arraylist to prevent same student id
+        studentIDs.add(studentCode);
+        return studentCode;
     }
 
     public static String getSchoolInput() {

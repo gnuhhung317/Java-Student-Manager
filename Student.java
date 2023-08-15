@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Student extends Person {
-    private String studentID;
+    private String studentCode;
     private String school;
     private int schoolStartDate;
     private double CPA;
@@ -14,22 +14,22 @@ public class Student extends Person {
     public Student(){
         super();
     }
-    public Student(String name, LocalDate birthday, String address, double height, double weight, String studentID,
+    public Student(String name, LocalDate birthday, String address, double height, double weight, String studentCode,
             String school, int schoolStartDate, double CPA) {
         super(name, birthday, address, height, weight);
-        this.studentID = studentID;
+        this.studentCode = studentCode;
         this.school = school;
         this.schoolStartDate = schoolStartDate;
         this.CPA = CPA;
         this.ability = AcademicAbility.getAcademicAbility(CPA);
     }
 
-    public String getStudentID() {
-        return this.studentID;
+    public String getStudentCode() {
+        return this.studentCode;
     }
 
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
+    public void setStudentCode(String studentCode) {
+        this.studentCode = studentCode;
     }
 
     public String getSchool() {
@@ -69,21 +69,22 @@ public class Student extends Person {
             return false;
         Student student = (Student) o;
         return schoolStartDate == student.schoolStartDate && Double.compare(CPA, student.CPA) == 0
-                && Objects.equals(studentID, student.studentID) && Objects.equals(school, student.school);
+                && Objects.equals(studentCode, student.studentCode) && Objects.equals(school, student.school);
     }
 
     @Override
     public String toString() {
-        return "Id: " + getId() + "\n" +
+        return "Id: " + getID() + "\n" +
                 "Name: " + getName() + "\n" +
                 "Birthday: " + getBirthday() + "\n" +
                 "Address: " + getAddress() + "\n" +
                 "Height: " + getHeight() + "\n" +
                 "Weight: " + getWeight() + "\n" +
-                "StudentID:" + getStudentID() + "\n" +
+                "StudentID:" + getStudentCode() + "\n" +
                 "School: " + getSchool() + "\n" +
                 "SchoolStartDate: " + getSchoolStartDate() + "\n" +
                 "CPA: " + getCPA()+
+                "AcademicAbility: "+ getAbility()+
                 "\n----------------------------------";
     }
 

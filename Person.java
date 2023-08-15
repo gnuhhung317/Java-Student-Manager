@@ -3,10 +3,9 @@ package StudentManagement;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-
 public class Person implements Serializable, Comparable<Person> {
     private static int countPerson = 0;
-    private int id;
+    private int iD;
     private String name;
     private LocalDate birthday;
     private String address;
@@ -16,7 +15,7 @@ public class Person implements Serializable, Comparable<Person> {
     public Person(String name, LocalDate birthday, String address, double height, double weight) {
 
         this.countPerson++;
-        this.id = countPerson;
+        this.iD = countPerson;
         this.name = name;
         this.birthday = birthday;
         this.address = address;
@@ -28,12 +27,12 @@ public class Person implements Serializable, Comparable<Person> {
 
     }
 
-    public int getId() {
-        return this.id;
+    public int getID() {
+        return this.iD;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int iD) {
+        this.iD = iD;
     }
 
     public String getName() {
@@ -79,7 +78,7 @@ public class Person implements Serializable, Comparable<Person> {
     @Override
     public String toString() {
         return "{" +
-                " id='" + getId() + "'" +
+                " id='" + getID() + "'" +
                 ", name='" + getName() + "'" +
                 ", birthday='" + getBirthday() + "'" +
                 ", address='" + getAddress() + "'" +
@@ -90,6 +89,6 @@ public class Person implements Serializable, Comparable<Person> {
 
     @Override
     public int compareTo(Person o) {
-        return (this.id == o.id)?1:-1;
+        return (this.iD == o.iD) ? 1 : -1;
     }
 }

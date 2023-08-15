@@ -2,28 +2,20 @@ package StudentManagement;
 
 import java.util.Scanner;
 
-public class Main {
+public class ListTest {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         StudentManager manager = new StudentManager();
-        String quantity;
         boolean isRunning = true;
-
-        // get the students information here
-        System.out.println("Enter the student's quantity: ");
-        quantity = sc.next();
-        while (Validator.isNotInteger(quantity)|| Integer.parseInt(quantity)<0) {
-            System.out.println("Invalid input, enter the quantity again: ");
-            quantity = sc.next();
-        }
-        for (int i = 0; i < Integer.parseInt(quantity); i++) {
-            manager.addStudent();
-        }
 
         // Menu
         String choice;
         do {
+            String statement = (manager.students.size() <2)?"There's "+manager.students.size() +
+                    " student":"There's "+manager.students.size() + " students";
+            statement += " in list";
+            System.out.println(statement);
             System.out.println("Enter your choice:");
             System.out.println("1. Add student");
             System.out.println("2. Find student by ID");
