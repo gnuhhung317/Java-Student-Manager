@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Validator {
     static String name;
+    static LocalDate birthday = null;
     static String address;
     static Double height;
     static Double weight;
@@ -50,8 +51,7 @@ public class Validator {
     }
 
     public static LocalDate getBirthdayInput() {
-        String birthdayString;
-        LocalDate birthday = null;
+        String birthdayString, actualBirthday;
         boolean isValidDate = false;
         do {
             System.out.println("Enter your birthday (dd/mm/yyyy): ");
@@ -59,7 +59,13 @@ public class Validator {
 
             try {
                 birthday = LocalDate.parse(birthdayString, DateTimeFormatter.ofPattern("d/M/yyyy"));
-                isValidDate = true;
+                actualBirthday = birthday.format(DateTimeFormatter.ofPattern("d/M/yyyy"));
+                if (actualBirthday.equals(birthdayString)){
+                    isValidDate = true;
+                }
+                else {
+                    System.out.print("Invalid input! ");
+                }
             } catch (Exception e) {
                 System.out.print("Invalid input! ");
 
@@ -174,7 +180,7 @@ public class Validator {
                 yearString = sc.nextLine();
             }
             schoolStartDate = Integer.parseInt(yearString);
-            if (schoolStartDate < Constant.MIN_START_SCHOOL_YEAR || schoolStartDate > Constant.MAX_START_SCHOOL_YEAR) {
+            if (schoolStartDate < Constant.MIN_START_SCHOOL_YEAR || schoolStartDate > Constant.MAX_START_SCHOOL_YEAR||schoolStartDate <= birthday.getYear()) {
                 System.out.print("Invalid input! ");
             }
         } while (schoolStartDate < Constant.MIN_START_SCHOOL_YEAR || schoolStartDate > Constant.MAX_START_SCHOOL_YEAR);

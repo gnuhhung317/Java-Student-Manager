@@ -1,19 +1,22 @@
-package StudentManagement;
+package StudentManagement.Main;
+
+import StudentManagement.Student;
+import StudentManagement.StudentManagerList;
 
 import java.util.Scanner;
 
-public class ArrayTest {
+public class ListTest {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        StudentManagerArray manager = new StudentManagerArray();
+        StudentManagerList manager = new StudentManagerList();
         boolean isRunning = true;
 
         // Menu
         String choice;
         do {
-            String statement = (manager.students.length <2)?"There's "+manager.students.length +
-                    " student":"There's "+manager.students.length + " students";
+            String statement = (manager.students.size() <2)?"There's "+manager.students.size() +
+                    " student":"There's "+manager.students.size() + " students";
             statement += " in list";
             System.out.println(statement);
             System.out.println("Enter your choice:");

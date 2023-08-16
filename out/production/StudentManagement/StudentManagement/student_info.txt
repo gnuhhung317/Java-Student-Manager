@@ -1,0 +1,24 @@
+Id: 1
+Name: hung
+Birthday: 2004-02-19
+Address: thia
+Height: 120.0
+Weight: 120.0
+StudentID:1209876543
+School: 123
+SchoolStartDate: 2000
+CPA: 10.0
+AcademicAbility: EXCELLENCE
+----------------------------------
+Id: 2
+Name: hung
+Birthday: 2002-12-12
+Address: thai binh
+Height: 120.0
+Weight: 120.0
+StudentID:1234567890
+School: bk
+SchoolStartDate: 2020
+CPA: 1.0
+AcademicAbility: POOR
+----------------------------------

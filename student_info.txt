@@ -1,22 +1,24 @@
 Id: 1
 Name: hung
-Birthday: 2000-02-29
-Address: 20
-Height: 120.0
-Weight: 120.0
+Birthday: 2004-10-20
+Address: 2000
+Height: 200.0
+Weight: 200.0
 StudentID:1234567890
-School: 120
+School: bk
 SchoolStartDate: 2000
-CPA: 2.0AcademicAbility: POOR
+CPA: 10.0
+AcademicAbility: EXCELLENCE
 ----------------------------------
 Id: 2
-Name: ngoan
-Birthday: 2002-12-12
-Address: bk
+Name: hung
+Birthday: 1976-10-20
+Address: bkhoa
 Height: 120.0
 Weight: 120.0
-StudentID:1234567809
-School: bachkhoa
-SchoolStartDate: 2020
-CPA: 10.0AcademicAbility: EXCELLENCE
+StudentID:0987654321
+School: bk
+SchoolStartDate: 2000
+CPA: 4.0
+AcademicAbility: WEAK
 ----------------------------------

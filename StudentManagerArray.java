@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class StudentManagerArray {
-    Student[] students = new Student[0];
+    public Student[] students = new Student[0];
     private final Scanner sc = new Scanner(System.in);
     private String name, address, studentCode, school;
     private double weight, height;
