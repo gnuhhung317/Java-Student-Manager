@@ -1,4 +1,4 @@
-package StudentManagement;
+package studentmanagement.model;
 
 public enum AcademicAbility {
     POOR,

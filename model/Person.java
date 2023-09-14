@@ -1,5 +1,4 @@
-package StudentManagement;
-
+package studentmanagement.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 

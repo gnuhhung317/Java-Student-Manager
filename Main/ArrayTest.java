@@ -1,7 +1,7 @@
-package StudentManagement.Main;
+package studentmanagement.main;
 
-import StudentManagement.Student;
-import StudentManagement.StudentManagerArray;
+import studentmanagement.controller.StudentManagerArray;
+import studentmanagement.model.Student;
 
 import java.util.Scanner;
 
@@ -31,27 +31,42 @@ public class ArrayTest {
             choice = sc.next();
 
             switch (choice) {
-                case "1" -> manager.addStudent();
-                case "2" -> {
+                case "1" :
+                    manager.addStudent();
+                    break;
+                case "2" :
                     Student student = manager.findByID();
                     if (student == null) {
                         System.out.println("Student not found");
                         break;
                     }
                     System.out.println(student);
-                }
-                case "3" -> manager.updateByID();
-                case "4" -> manager.deleteByID();
-                case "5" -> manager.showAbilityPercent();
-                case "6" -> manager.showMediumScorePercent();
-                case "7" -> manager.showStudentByAbility();
-                case "8" -> {
+                    break;
+
+                case "3":
+                    manager.updateByID();
+                    break;
+                case "4" :
+                    manager.deleteByID();
+                    break;
+                case "5":
+                    manager.showAbilityPercent();
+                    break;
+                case "6" :
+                    manager.showMediumScorePercent();
+                    break;
+                case "7" :
+                    manager.showStudentByAbility();
+                    break;
+                case "8" :
                     isRunning = false;
                     manager.saveStudentsInfo();
                     manager.saveStudentObjects();
                     System.out.println("Good bye!");
-                }
-                default -> System.out.println("Invalid choice!");
+                    break;
+                default :
+                    System.out.println("Invalid choice!");
+                    break;
             }
         } while (isRunning);
 
